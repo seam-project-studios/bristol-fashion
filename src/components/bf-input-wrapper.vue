@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="form-element">
     <label>
       <span>{{ label }}</span>
       <slot />
     </label>
     <bf-help-error>
-      <slot name="help-text" />
+      <slot name="help-error" />
     </bf-help-error>
     <bf-help-text>
-      <slot name="help-error" />
+      <slot name="help-text" />
     </bf-help-text>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <bf-input-wrapper
     :label="label"
+    :class="{ error: showError }"
   >
     <input
       ref="input"
@@ -9,15 +10,16 @@
       :value="value"
       @input="onInput"
       @blur="setTouched"
+      @invalid="setTouched"
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
     />
+    <template #help-error v-if="showError">
+      {{ injectedError || error }}
+    </template>
     <template #help-text>
       <slot name="help-text" />
-    </template>
-    <template #help-error v-if="touched && error">
-      {{ error }}
     </template>
   </bf-input-wrapper>
 </template>

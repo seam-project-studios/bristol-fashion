@@ -1,7 +1,8 @@
 export default {
   data: () => ({
     touched: false,
-    error: undefined
+    error: undefined,
+    injectedError: false
   }),
   props: {
     name: { type: String, required: true },
@@ -13,6 +14,11 @@ export default {
     mini: { type: Boolean, default: () => false },
     floatLabel: { type: Boolean, default: () => true }
   },
+  computed: {
+    showError () {
+      return this.injectedError || (this.touched && this.error);
+    }
+  },
   methods: {
     onInput (e) {
       this.$emit('input', e.target.value);
@@ -20,6 +26,13 @@ export default {
     },
     setTouched () {
       this.touched = true;
+    },
+    injectError (i18nPath, payload) {
+      this.injectedError = this.$t(i18nPath, payload);
+    },
+    clearError () {
+      this.injectedError = undefined;
+      this.touched = false;
     },
     runValidation () {
       if (this.validate) {
