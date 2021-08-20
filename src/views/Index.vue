@@ -36,15 +36,28 @@
       <button type="button" @click="$refs.myNumber.clearError()">.clearError()</button>
       <button type="submit">Go</button>
     </form>
+    <hr />
+    <BfButton
+      name="myButton"
+      type="submit"
+      value="somevalue"
+    >
+      Click my button
+    </BfButton>
   </section>
 </template>
 
 <script>
+import BfButton from '@/components/bf-button.vue';
 import BfInputString, { vString } from '@/components/bf-input-string.vue';
 import BfInputNumber, { vNumber } from '@/components/bf-input-number.vue';
 export default {
   name: 'Index',
-  components: { BfInputString, BfInputNumber },
+  components: {
+    BfInputString,
+    BfInputNumber,
+    BfButton
+  },
   data: () => ({
     inputString: null,
     inputNumber: null,
