@@ -2,10 +2,12 @@
   <bf-input-wrapper
     :label="label"
     :class="{ error: showError }"
+    :name="name"
   >
     <input
       ref="input"
       :type="type"
+      :id="name"
       :name="name"
       :value="value"
       @input="onInput"
@@ -14,12 +16,18 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
+      :aria-label="name"
+      :aria-describedby="`help-text-${name}`"
     />
     <template #help-error v-if="showError">
-      {{ injectedError || error }}
+      <div role="alert">
+        {{ injectedError || error }}
+      </div>
     </template>
     <template #help-text>
-      <slot name="help-text" />
+      <div :id="`help-text-${name}`">
+        <slot name="help-text" />
+      </div>
     </template>
   </bf-input-wrapper>
 </template>
