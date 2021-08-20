@@ -5,7 +5,7 @@
   >
     <input
       ref="input"
-      :type="type"
+      type="number"
       :name="name"
       :value="value"
       @input="onInput"
@@ -14,6 +14,7 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
+      step="any"
     />
     <template #help-error v-if="showError">
       {{ injectedError || error }}
@@ -30,21 +31,36 @@ import feMixin from '@/mixins/form-element';
 
 export default {
   components: { bfInputWrapper },
-  name: 'bf-input-string',
+  name: 'bf-input-number',
   mixins: [feMixin],
   data: () => ({ }),
   props: {
-    value: { validator: (value) => value === null || typeof value === 'string', required: true },
-    type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
+    value: { validator: (value) => value === null || typeof value === 'number', required: true },
     placeholder: { type: String, required: false },
-    mask: { type: String, required: false },
     clearable: { type: Boolean, default: () => false }
+  },
+  methods: {
+    onWheel (e) {
+      e.preventDefault();
+    }
+  },
+  mounted () {
+    this.$refs.input.addEventListener('wheel', this.onWheel);
+  },
+  beforeDestroy () {
+    this.$refs.input.removeEventListener('wheel', this.onWheel);
   }
 };
 
-export const vString = (minLength = 0, maxLength = 255) => (value) => window.validateReturn(
-  typeof value !== 'string' || value.length < minLength || value.length > maxLength,
-  'validate.string',
-  { minLength, maxLength, value }
+export const vNumber = (min = 0, max = Number.MAX_SAFE_INTEGER) => (value) => window.validateReturn(
+  typeof value !== 'number' || value < min || value > max,
+  'validate.number',
+  { min, max, value }
 );
 </script>
+
+<style scoped>
+input {
+  -moz-appearance: textfield;
+}
+</style>

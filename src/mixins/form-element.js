@@ -7,7 +7,6 @@ export default {
   props: {
     name: { type: String, required: true },
     label: { type: String, required: true },
-    value: { type: String, required: true },
     validate: { type: Function, required: false },
     disabled: { type: Boolean, default: () => false },
     readonly: { type: Boolean, default: () => false },
@@ -23,6 +22,7 @@ export default {
     onInput (e) {
       this.$emit('input', e.target.value);
       this.setTouched();
+      this.injectedError = false;
     },
     setTouched () {
       this.touched = true;
@@ -32,7 +32,7 @@ export default {
       this.$refs.input.setCustomValidity(this.injectedError);
     },
     clearError () {
-      this.injectedError = undefined;
+      this.injectedError = false;
       this.touched = false;
       this.runValidation();
     },

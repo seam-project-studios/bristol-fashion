@@ -1,6 +1,7 @@
 {
   "validate": {
-    "string": "Please enter a text between {minLength} and {maxLength} characters"
+    "string": "Please enter a text between {minLength} and {maxLength} characters",
+    "number": "Please enter a number between {min} and {max}"
   },
   "app":{
     "test-error": "This is a translated test error"
