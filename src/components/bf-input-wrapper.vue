@@ -1,0 +1,27 @@
+<template>
+  <div>
+    <label>
+      <span>{{ label }}</span>
+      <slot />
+    </label>
+    <bf-help-error>
+      <slot name="help-text" />
+    </bf-help-error>
+    <bf-help-text>
+      <slot name="help-error" />
+    </bf-help-text>
+  </div>
+</template>
+
+<script>
+import bfHelpText from './bf-help-text.vue';
+import bfHelpError from './bf-help-error.vue';
+export default {
+  components: { bfHelpText, bfHelpError },
+  name: 'bf-input-wrapper',
+  data: () => ({}),
+  props: {
+    label: { type: String, required: true }
+  }
+};
+</script>
