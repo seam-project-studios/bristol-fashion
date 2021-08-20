@@ -8,6 +8,10 @@ require('dotenv-flow').config();
 Vue.config.productionTip = false;
 
 window.app = new Vue({
+  created () {
+    const html = document.documentElement;
+    html.setAttribute('lang', 'en');
+  },
   i18n,
   render: h => h(Index)
 }).$mount('#app');
