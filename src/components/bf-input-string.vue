@@ -3,15 +3,20 @@
     :label="label"
   >
     <input
+      ref="input"
       :type="type"
       :name="name"
       :value="value"
-      @input="e => $emit('input', e.target.value)"
+      @input="onInput"
+      @blur="setTouched"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
     />
     <template #help-text>
       <slot name="help-text" />
     </template>
-    <template #help-error v-if="error">
+    <template #help-error v-if="touched && error">
       {{ error }}
     </template>
   </bf-input-wrapper>
@@ -19,23 +24,24 @@
 
 <script>
 import bfInputWrapper from './bf-input-wrapper.vue';
+import feMixin from '@/mixins/form-element';
+
 export default {
   components: { bfInputWrapper },
   name: 'bf-input-string',
-  data: () => ({
-    error: false
-  }),
+  mixins: [feMixin],
+  data: () => ({ }),
   props: {
-    name: { type: String, required: true },
     type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
-    label: { type: String, required: true },
     placeholder: { type: String, required: false },
-    value: { type: String, required: true },
     mask: { type: String, required: false },
-    disabled: { type: Boolean, default: () => false },
-    readonly: { type: Boolean, default: () => false },
-    clearable: { type: Boolean, defualt: () => false },
-    validate: { type: Function, required: false }
+    clearable: { type: Boolean, default: () => false }
   }
 };
+
+export const vString = (minLength = 0, maxLength = 255) => (value) => window.validateReturn(
+  typeof value !== 'string' || value.length < minLength || value.length > maxLength,
+  'validate.string',
+  { minLength, maxLength, value }
+);
 </script>

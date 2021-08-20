@@ -1,19 +1,29 @@
 <template>
-  <bf-input-string
-    v-model="inputString"
-    label="My input string"
-    name="my-string"
-    type="text"
-  />
+  <form @submit.prevent>
+    <bf-input-string
+      v-model="inputString"
+      label="My input string"
+      name="my-string"
+      type="text"
+      :validate="vString(1, 3)"
+    >
+      <template #help-text>
+        1 to 3 chars
+      </template>
+    </bf-input-string>
+
+    <button type="submit">Go</button>
+  </form>
 </template>
 
 <script>
-import BfInputString from '@/components/bf-input-string.vue';
+import BfInputString, { vString } from '@/components/bf-input-string.vue';
 export default {
   name: 'Index',
   components: { BfInputString },
   data: () => ({
-    inputString: ''
+    inputString: '',
+    vString
   })
 };
 </script>
