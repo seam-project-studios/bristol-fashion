@@ -1,3 +1,5 @@
 {
-  
+  "validate": {
+    "string": "Please enter a text between {minLength} and {maxLength} characters"
+  }
 }
