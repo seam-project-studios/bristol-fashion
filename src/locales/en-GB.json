@@ -1,5 +1,8 @@
 {
   "validate": {
     "string": "Please enter a text between {minLength} and {maxLength} characters"
+  },
+  "app":{
+    "test-error": "This is a translated test error"
   }
 }

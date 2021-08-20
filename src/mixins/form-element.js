@@ -29,10 +29,12 @@ export default {
     },
     injectError (i18nPath, payload) {
       this.injectedError = this.$t(i18nPath, payload);
+      this.$refs.input.setCustomValidity(this.injectedError);
     },
     clearError () {
       this.injectedError = undefined;
       this.touched = false;
+      this.runValidation();
     },
     runValidation () {
       if (this.validate) {

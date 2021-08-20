@@ -13,7 +13,7 @@
       </template>
     </bf-input-string>
 
-    <button type="button" @click="$refs.myString.injectError('Error!')">.injectError()</button>
+    <button type="button" @click="$refs.myString.injectError('app.test-error')">.injectError()</button>
     <button type="button" @click="$refs.myString.clearError()">.clearError()</button>
     <button type="submit">Go</button>
   </form>
