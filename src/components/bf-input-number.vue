@@ -15,6 +15,8 @@
       @invalid="setTouched"
       :placeholder="placeholder"
       :disabled="disabled"
+      :autocomplete="autocomplete"
+      :autofocus="autofocus"
       :readonly="readonly"
       step="any"
       :aria-label="name"

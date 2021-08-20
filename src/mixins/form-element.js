@@ -11,7 +11,9 @@ export default {
     disabled: { type: Boolean, default: () => false },
     readonly: { type: Boolean, default: () => false },
     mini: { type: Boolean, default: () => false },
-    floatLabel: { type: Boolean, default: () => true }
+    floatLabel: { type: Boolean, default: () => true },
+    autocomplete: { type: Boolean, default: () => false },
+    autofocus: { type: Boolean, default: () => false }
   },
   computed: {
     showError () {

@@ -14,6 +14,13 @@
       @blur="setTouched"
       @invalid="setTouched"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
+      :autofocus="autofocus"
+      :form="form"
+      :list="list"
+      :maxlength="maxlength"
+      :min="min"
+      :pattern="pattern"
       :disabled="disabled"
       :readonly="readonly"
       :aria-label="name"
@@ -46,7 +53,12 @@ export default {
     type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
     placeholder: { type: String, required: false },
     mask: { type: String, required: false },
-    clearable: { type: Boolean, default: () => false }
+    clearable: { type: Boolean, default: () => false },
+    maxlength: { type: Number, required: false },
+    min: { type: Number, required: false },
+    form: { type: String, required: false },
+    list: { type: String, required: false },
+    pattern: { type: String, required: false }
   }
 };
 
