@@ -3,11 +3,12 @@
     :label="label"
     :class="{ error: showError }"
     :name="name"
+    :inputId="inputId"
   >
     <input
       ref="input"
       :type="type"
-      :id="id"
+      :id="inputId"
       :name="name"
       :value="value"
       @input="onInput"
@@ -21,7 +22,7 @@
       :disabled="disabled"
       :readonly="readonly"
       :aria-label="name"
-      :aria-describedby="`${componentId}-${name}`"
+      :aria-describedby="`${inputId}-help-text`"
     />
     <template #help-error v-if="showError">
       <div role="alert">
@@ -29,7 +30,7 @@
       </div>
     </template>
     <template #help-text>
-      <div :id="`${componentId}-${name}`">
+      <div :id="`${inputId}-help-text`">
         <slot name="help-text" />
       </div>
     </template>
@@ -39,14 +40,13 @@
 <script>
 import bfInputWrapper from './bf-input-wrapper.vue';
 import feMixin from '@/mixins/form-element';
+import { nextId } from '@/utils/generateId';
 
 export default {
   components: { bfInputWrapper },
   name: 'bf-input-string',
   mixins: [feMixin],
-  data: () => ({
-    componentId: null
-  }),
+  data: () => ({ }),
   props: {
     value: { validator: (value) => value === null || typeof value === 'string', required: true },
     type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
@@ -55,11 +55,8 @@ export default {
     clearable: { type: Boolean, default: () => false },
     maxlength: { type: Number, required: false },
     min: { type: Number, required: false },
-    id: { type: String, required: false },
+    inputId: { type: String, default: () => nextId(), required: false },
     list: { type: String, required: false }
-  },
-  mounted () {
-    this.componentId = this._uid;
   }
 };
 

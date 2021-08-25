@@ -3,12 +3,13 @@
     :label="label"
     :class="{ error: showError }"
     :name="name"
+    :inputId="inputId"
   >
     <input
       ref="input"
       type="number"
       :name="name"
-      :id="id"
+      :id="inputId"
       :value="value"
       @input="onInput"
       @blur="setTouched"
@@ -22,7 +23,7 @@
       :readonly="readonly"
       step="any"
       :aria-label="name"
-      :aria-describedby="`${componentId}-${name}`"
+      :aria-describedby="`${inputId}-help-text`"
     />
     <template #help-error v-if="showError">
       <div role="alert">
@@ -30,7 +31,7 @@
       </div>
     </template>
     <template #help-text>
-      <div :id="`${componentId}-${name}`">
+      <div :id="`${inputId}-help-text`">
         <slot name="help-text" />
       </div>
     </template>
@@ -40,19 +41,19 @@
 <script>
 import bfInputWrapper from './bf-input-wrapper.vue';
 import feMixin from '@/mixins/form-element';
+import { nextId } from '@/utils/generateId';
 
 export default {
   components: { bfInputWrapper },
   name: 'bf-input-number',
   mixins: [feMixin],
-  data: () => ({
-    componentId: null
-  }),
+  data: () => ({ }),
   props: {
     value: { validator: (value) => value === null || typeof value === 'number', required: true },
     placeholder: { type: String, required: false },
     id: { type: String, required: false },
-    clearable: { type: Boolean, default: () => false }
+    clearable: { type: Boolean, default: () => false },
+    inputId: { type: String, default: () => nextId(), required: false }
   },
   methods: {
     onWheel (e) {
@@ -61,7 +62,6 @@ export default {
   },
   mounted () {
     this.$refs.input.addEventListener('wheel', this.onWheel);
-    this.componentId = this._uid;
   },
   beforeDestroy () {
     this.$refs.input.removeEventListener('wheel', this.onWheel);
