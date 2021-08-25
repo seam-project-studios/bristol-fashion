@@ -17,7 +17,6 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
-      :list="list"
       :maxlength="maxlength"
       :disabled="disabled"
       :readonly="readonly"
@@ -55,8 +54,7 @@ export default {
     clearable: { type: Boolean, default: () => false },
     maxlength: { type: Number, required: false },
     min: { type: Number, required: false },
-    inputId: { type: String, default: () => nextId(), required: false },
-    list: { type: String, required: false }
+    inputId: { type: String, default: () => nextId(), required: false }
   }
 };
 
