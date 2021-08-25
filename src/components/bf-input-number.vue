@@ -2,25 +2,38 @@
   <bf-input-wrapper
     :label="label"
     :class="{ error: showError }"
+    :name="name"
+    :inputId="inputId"
   >
     <input
       ref="input"
       type="number"
       :name="name"
+      :id="inputId"
       :value="value"
       @input="onInput"
       @blur="setTouched"
       @invalid="setTouched"
       :placeholder="placeholder"
       :disabled="disabled"
+      :autocomplete="autocomplete"
+      :autofocus="autofocus"
+      :min="min"
+      :max="max"
       :readonly="readonly"
       step="any"
+      :aria-label="name"
+      :aria-describedby="`${inputId}-help-text`"
     />
     <template #help-error v-if="showError">
-      {{ injectedError || error }}
+      <div role="alert">
+        {{ injectedError || error }}
+      </div>
     </template>
     <template #help-text>
-      <slot name="help-text" />
+      <div :id="`${inputId}-help-text`">
+        <slot name="help-text" />
+      </div>
     </template>
   </bf-input-wrapper>
 </template>

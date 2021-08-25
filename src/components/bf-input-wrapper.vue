@@ -1,6 +1,6 @@
 <template>
   <div class="form-element">
-    <label>
+    <label :for="inputId">
       <span>{{ label }}</span>
       <slot />
     </label>
@@ -21,7 +21,8 @@ export default {
   name: 'bf-input-wrapper',
   data: () => ({}),
   props: {
-    label: { type: String, required: true }
+    label: { type: String, required: true },
+    inputId: { type: String, required: true }
   }
 };
 </script>
