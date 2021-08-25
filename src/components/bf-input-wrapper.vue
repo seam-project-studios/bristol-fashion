@@ -1,6 +1,6 @@
 <template>
   <div class="form-element">
-    <label :for="name">
+    <label :for="id">
       <span>{{ label }}</span>
       <slot />
     </label>
@@ -22,7 +22,7 @@ export default {
   data: () => ({}),
   props: {
     label: { type: String, required: true },
-    name: { type: String, required: false }
+    id: { type: String, required: false }
   }
 };
 </script>

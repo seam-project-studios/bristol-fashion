@@ -18,8 +18,6 @@
       :autofocus="autofocus"
       :list="list"
       :maxlength="maxlength"
-      :min="min"
-      :pattern="pattern"
       :disabled="disabled"
       :readonly="readonly"
       :aria-label="name"
@@ -58,8 +56,7 @@ export default {
     maxlength: { type: Number, required: false },
     min: { type: Number, required: false },
     id: { type: String, required: false },
-    list: { type: String, required: false },
-    pattern: { type: String, required: false }
+    list: { type: String, required: false }
   },
   mounted () {
     this.componentId = this._uid;

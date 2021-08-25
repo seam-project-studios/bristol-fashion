@@ -17,6 +17,8 @@
       :disabled="disabled"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
+      :min="min"
+      :max="max"
       :readonly="readonly"
       step="any"
       :aria-label="name"
