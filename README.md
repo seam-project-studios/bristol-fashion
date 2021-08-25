@@ -44,6 +44,7 @@ Vue UI Library
 .bf-flex-row-reverse
 .bf-flex-wrap
 .bf-flex-wrap-reverse
+.bf-flex-grow-<1-5>
 .bf-is-hidden--all
 .bf-is-visible--all
 .bf-is-hidden--xs
