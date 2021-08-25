@@ -1,6 +1,6 @@
 <template>
   <button
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :form="form"
     :formaction="formaction"
     :formenctype="formenctype"
@@ -10,7 +10,6 @@
     :name="name"
     :type="type"
     :value="value"
-    :loading="loading"
     :ariaPressed="ariaPressed"
     :ariaExpanded="ariaExpanded"
   >
