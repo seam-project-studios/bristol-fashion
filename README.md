@@ -38,6 +38,9 @@ Vue UI Library
 .bf-content-space-around--y
 .bf-content-stretch--x
 .bf-content-stretch--y
+.bf-nav
+.bf-nav-vertical
+.bf-nav-horizontal
 .bf-flex-column
 .bf-flex-row
 .bf-flex-column-reverse
