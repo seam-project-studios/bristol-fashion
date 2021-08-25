@@ -1,7 +1,5 @@
 <template>
   <button
-    :autofocus="autofocus"
-    :autocomplete="autocomplete"
     :disabled="disabled"
     :form="form"
     :formaction="formaction"
@@ -25,8 +23,6 @@ export default {
   name: 'bf-button',
   data: () => ({ }),
   props: {
-    autofocus: { type: Boolean, required: false },
-    autocomplete: { type: Boolean, required: false },
     disabled: { type: Boolean, required: false },
     form: { type: String, required: false },
     formaction: { type: String, required: false },
@@ -35,7 +31,7 @@ export default {
     formnovalidate: { type: Boolean, default: false, required: false },
     formtarget: { type: String, required: false },
     name: { type: String, required: false },
-    type: { type: String, required: false },
+    type: { type: String, default: () => 'button', required: false },
     value: { type: String, required: false },
     loading: { type: Boolean, required: false },
     ariaPressed: { type: Boolean, required: false },
