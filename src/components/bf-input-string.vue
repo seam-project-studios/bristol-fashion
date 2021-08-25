@@ -7,7 +7,7 @@
     <input
       ref="input"
       :type="type"
-      :id="name"
+      :id="id"
       :name="name"
       :value="value"
       @input="onInput"
@@ -24,7 +24,7 @@
       :disabled="disabled"
       :readonly="readonly"
       :aria-label="name"
-      :aria-describedby="`help-text-${name}`"
+      :aria-describedby="`${componentId}-${name}`"
     />
     <template #help-error v-if="showError">
       <div role="alert">
@@ -32,7 +32,7 @@
       </div>
     </template>
     <template #help-text>
-      <div :id="`help-text-${name}`">
+      <div :id="`${componentId}-${name}`">
         <slot name="help-text" />
       </div>
     </template>
@@ -47,7 +47,9 @@ export default {
   components: { bfInputWrapper },
   name: 'bf-input-string',
   mixins: [feMixin],
-  data: () => ({ }),
+  data: () => ({
+    componentId: null
+  }),
   props: {
     value: { validator: (value) => value === null || typeof value === 'string', required: true },
     type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
@@ -56,9 +58,13 @@ export default {
     clearable: { type: Boolean, default: () => false },
     maxlength: { type: Number, required: false },
     min: { type: Number, required: false },
+    id: { type: String, required: false },
     form: { type: String, required: false },
     list: { type: String, required: false },
     pattern: { type: String, required: false }
+  },
+  mounted () {
+    this.componentId = this._uid;
   }
 };
 

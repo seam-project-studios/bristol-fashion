@@ -8,7 +8,7 @@
       ref="input"
       type="number"
       :name="name"
-      :id="name"
+      :id="id"
       :value="value"
       @input="onInput"
       @blur="setTouched"
@@ -20,7 +20,7 @@
       :readonly="readonly"
       step="any"
       :aria-label="name"
-      :aria-describedby="`help-text-${name}`"
+      :aria-describedby="`${componentId}-${name}`"
     />
     <template #help-error v-if="showError">
       <div role="alert">
@@ -28,7 +28,7 @@
       </div>
     </template>
     <template #help-text>
-      <div :id="`help-text-${name}`">
+      <div :id="`${componentId}-${name}`">
         <slot name="help-text" />
       </div>
     </template>
@@ -43,10 +43,13 @@ export default {
   components: { bfInputWrapper },
   name: 'bf-input-number',
   mixins: [feMixin],
-  data: () => ({ }),
+  data: () => ({
+    componentId: null
+  }),
   props: {
     value: { validator: (value) => value === null || typeof value === 'number', required: true },
     placeholder: { type: String, required: false },
+    id: { type: String, required: false },
     clearable: { type: Boolean, default: () => false }
   },
   methods: {
@@ -56,6 +59,7 @@ export default {
   },
   mounted () {
     this.$refs.input.addEventListener('wheel', this.onWheel);
+    this.componentId = this._uid;
   },
   beforeDestroy () {
     this.$refs.input.removeEventListener('wheel', this.onWheel);
