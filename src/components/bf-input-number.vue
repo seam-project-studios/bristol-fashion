@@ -41,7 +41,6 @@
 <script>
 import bfInputWrapper from './bf-input-wrapper.vue';
 import feMixin from '@/mixins/form-element';
-import { nextId } from '@/utils/generateId';
 
 export default {
   components: { bfInputWrapper },
@@ -52,8 +51,7 @@ export default {
     value: { validator: (value) => value === null || typeof value === 'number', required: true },
     placeholder: { type: String, required: false },
     id: { type: String, required: false },
-    clearable: { type: Boolean, default: () => false },
-    inputId: { type: String, default: () => nextId(), required: false }
+    clearable: { type: Boolean, default: () => false }
   },
   methods: {
     onWheel (e) {

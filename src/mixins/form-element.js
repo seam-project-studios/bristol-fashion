@@ -1,3 +1,5 @@
+import { nextId } from '@/utils/generateId';
+
 export default {
   data: () => ({
     touched: false,
@@ -13,7 +15,8 @@ export default {
     mini: { type: Boolean, default: () => false },
     floatLabel: { type: Boolean, default: () => true },
     autocomplete: { type: Boolean, default: () => false },
-    autofocus: { type: Boolean, default: () => false }
+    autofocus: { type: Boolean, default: () => false },
+    inputId: { type: String, default: () => nextId(), required: false }
   },
   computed: {
     showError () {
