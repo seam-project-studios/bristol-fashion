@@ -32,7 +32,7 @@ export default {
     formaction: { type: String, required: false },
     formenctype: { type: String, required: false },
     formmethod: { type: String, required: false },
-    formnovalidate: { type: String, required: false },
+    formnovalidate: { type: Boolean, default: false, required: false },
     formtarget: { type: String, required: false },
     name: { type: String, required: false },
     type: { type: String, required: false },
