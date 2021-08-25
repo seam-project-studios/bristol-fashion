@@ -2,24 +2,36 @@
   <bf-input-wrapper
     :label="label"
     :class="{ error: showError }"
+    :name="name"
+    :inputId="inputId"
   >
     <input
       ref="input"
       :type="type"
+      :id="inputId"
       :name="name"
       :value="value"
       @input="onInput"
       @blur="setTouched"
       @invalid="setTouched"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
+      :autofocus="autofocus"
+      :maxlength="maxlength"
       :disabled="disabled"
       :readonly="readonly"
+      :aria-label="name"
+      :aria-describedby="`${inputId}-help-text`"
     />
     <template #help-error v-if="showError">
-      {{ injectedError || error }}
+      <div role="alert">
+        {{ injectedError || error }}
+      </div>
     </template>
     <template #help-text>
-      <slot name="help-text" />
+      <div :id="`${inputId}-help-text`">
+        <slot name="help-text" />
+      </div>
     </template>
   </bf-input-wrapper>
 </template>
@@ -27,6 +39,7 @@
 <script>
 import bfInputWrapper from './bf-input-wrapper.vue';
 import feMixin from '@/mixins/form-element';
+import { nextId } from '@/utils/generateId';
 
 export default {
   components: { bfInputWrapper },
@@ -38,7 +51,10 @@ export default {
     type: { validator: (type) => ['email', 'password', 'search', 'text', 'tel', 'url'].includes(type), default: () => 'text' },
     placeholder: { type: String, required: false },
     mask: { type: String, required: false },
-    clearable: { type: Boolean, default: () => false }
+    clearable: { type: Boolean, default: () => false },
+    maxlength: { type: Number, required: false },
+    min: { type: Number, required: false },
+    inputId: { type: String, default: () => nextId(), required: false }
   }
 };
 
