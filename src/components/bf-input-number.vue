@@ -50,7 +50,6 @@ export default {
   props: {
     value: { validator: (value) => value === null || typeof value === 'number', required: true },
     placeholder: { type: String, required: false },
-    id: { type: String, required: false },
     clearable: { type: Boolean, default: () => false }
   },
   methods: {
